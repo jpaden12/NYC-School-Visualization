@@ -1,0 +1,73 @@
+#title {
+  text-align: center;
+  font-size: 20px; 
+  font-family: sans-serif;
+}
+
+#view {
+  text-align: center; 
+  font-family: sans-serif;  
+  padding-top: 5px; 
+}
+
+#year {
+  text-align: center; 
+  font-family: sans-serif; 
+  padding-top: 10px; 
+}
+
+#buttons {
+  width: 300px; 
+  height: 600px;  
+  display: inline-block; 
+  vertical-align: top; 
+  border: 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+#radios {
+  padding-left: 60px; 
+  font-family: sans-serif; 
+}
+
+#vis { 
+  text-align: right;
+  display: inline-block; 
+  vertical-align: top; 
+  border: 1px;
+  border-color: black;
+  border-style: solid; 
+}
+
+.district:hover {
+  fill-opacity: 0.6;
+}
+
+.tooltip {
+  position: absolute;					
+  width: 105px;					
+  height: 50px;					
+  padding: 2px;	
+  	
+  color: white; 		
+  background: black;	
+  border: 0px;		
+  border-radius: 8px; 			
+  pointer-events: none;
+}
+
+#name {
+  font: 9px sans-serif;
+  font-weight: bold;
+  text-align: left; 
+  padding-left: 5px;
+}
+
+#demo {
+  text-align: left; 
+  font: 9px sans-serif; 
+  font-weight: bold;
+  padding-bottom: 10px;  
+  padding-left: 5px; 
+}
