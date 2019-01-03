@@ -23,7 +23,8 @@ var tooltip_words = {
     "hisp": "% Hispanic", 
     "white": "% White", 
     "disab": "% Students with Disabilities", 
-    "multi": "% Multiple Race Categories Not Represented"
+    "multi": "% Multiple Race Categories Not Represented", 
+    "esl": "% English Language Learners"
 }
 
 var slider_years = [2013, 2014, 2015, 2016, 2017]; 
@@ -171,7 +172,8 @@ function updateMap(data) {
             "poor": district["% Poverty"], 
             "asian": district["% Asian"],
             "multi": district["% Multiple Race Categories Not Represented"], 
-            "disab": district["% Students with Disabilities"] 
+            "disab": district["% Students with Disabilities"], 
+            "esl": district["% English Language Learners"]
         }); 
     }); 
 }
