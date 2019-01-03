@@ -26,6 +26,17 @@
   border-style: solid;
 }
 
+#colors {
+  text-align: center; 
+  font-family: sans-serif;  
+  padding-top: 5px; 
+}
+
+#colorList {
+  display: block; 
+  margin: auto; 
+}
+
 #radios {
   padding-left: 60px; 
   font-family: sans-serif; 
@@ -40,7 +51,8 @@
   border-style: solid; 
 }
 
-.district:hover {
+.district:hover, 
+svg rect:hover {
   fill-opacity: 0.6;
 }
 

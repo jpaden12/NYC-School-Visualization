@@ -26,6 +26,22 @@ var tooltip_words = {
     "multi": "% Multiple Race Categories Not Represented", 
     "esl": "% English Language Learners"
 }
+var mapColors = {
+    "grey": d3.scaleSequential(d3.interpolateGreys).domain([0, 100]), 
+    "blue": d3.scaleSequential(d3.interpolateBlues).domain([0, 100]), 
+    "green": d3.scaleSequential(d3.interpolateGreens).domain([0, 100]), 
+    "red": d3.scaleSequential(d3.interpolateReds).domain([0, 100]), 
+    "purple": d3.scaleSequential(d3.interpolatePurples).domain([0, 100]), 
+    "orange": d3.scaleSequential(d3.interpolateOranges).domain([0, 100])
+}
+
+var colorList = d3
+    .selectAll("svg rect")
+    .on("click", function() { 
+        updateColors(this.id); 
+    });
+
+var colorScale = d3.scaleSequential(d3.interpolateGreys).domain([0, 100]); 
 
 var slider_years = [2013, 2014, 2015, 2016, 2017]; 
 var index = 4; 
@@ -62,17 +78,20 @@ var path = d3.geoPath()
 
 let myMap = d3.map(); 
 
-var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, 91]); 
-
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0); 
 
+var checked = d3.select('input[name="demographics"]:checked').node().value;  
+
 var radios = d3.selectAll("input[name='demographics']")
                 .on("change", function() {
                     console.log(this.value);
-                    updateColors(this.value); 
+                    checked = this.value; 
+                    updateDemographic(this.value); 
                 }); 
+
+
 
 Promise.all([
     d3.json("nyc-school-topo.json"), 
@@ -91,8 +110,8 @@ Promise.all([
         index = slider_years.indexOf(val);
         updateMap(nestedDateData[index]);
         console.log(nestedDateData[index]); 
-        let checked = d3.select('input[name="demographics"]:checked').node().value; 
-        updateColors(checked);  
+         
+        updateDemographic(checked);  
     });
 
     svg.selectAll("path")
@@ -110,7 +129,6 @@ Promise.all([
 
             let name = JSON.stringify(myMap.get(dis.properties.school_dis)["name"]); 
             name = name.slice(1, name.length - 1); 
-            let checked = d3.select('input[name="demographics"]:checked').node().value; 
             let demo = JSON.stringify(myMap.get(dis.properties.school_dis)[checked]); 
             demo = Math.trunc(parseFloat(demo.slice(1, demo.length - 1)));
             let tip_word = ""; 
@@ -142,10 +160,9 @@ Promise.all([
 });
 
 //Updates colors with change of demographic (not year)
-function updateColors(value) {
+function updateDemographic(value) {
 
-    let max = d3.max(myMap.keys(), function(d) { return myMap.get(d)[value]; }); 
-    colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, 100]); 
+    let max = d3.max(myMap.keys(), function(d) { return myMap.get(d)[value]; });  
 
     svg.selectAll("path")
         .transition()
@@ -176,4 +193,15 @@ function updateMap(data) {
             "esl": district["% English Language Learners"]
         }); 
     }); 
+}
+
+//Update map with new colors
+function updateColors(newColor) {
+    colorScale = mapColors[newColor]; 
+    svg.selectAll("path")
+        .transition()
+        .duration(200)
+        .attr("fill", function(dis) {
+            return colorScale(myMap.get(dis.properties.school_dis)[checked]); 
+        }); 
 }
