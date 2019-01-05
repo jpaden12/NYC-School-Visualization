@@ -205,3 +205,7 @@ function updateColors(newColor) {
             return colorScale(myMap.get(dis.properties.school_dis)[checked]); 
         }); 
 }
+
+function createLegend() {
+    //Inseet legend code here
+}
