@@ -56,6 +56,10 @@
   fill-opacity: 0.6;
 }
 
+.legend_text {
+  font-family: sans-serif; 
+}
+
 .tooltip {
   position: absolute;					
   width: 105px;					

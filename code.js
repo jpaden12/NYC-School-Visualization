@@ -217,10 +217,8 @@ function updateColors(newColor) {
 
 //Creates legend
 function createLegend(intervals) {
-    //Inseet legend code here
     var legend = svg.append('g')
 
-    
     legend.selectAll("rect")
         .data(intervals)
         .enter()
@@ -232,5 +230,14 @@ function createLegend(intervals) {
         .attr("class", "legend_square")
         .style("fill", function(d) { return colorScale(d) })
         .style("opacity", 0.8);
-         
+        
+    legend.selectAll("text")
+        .data(intervals)
+        .enter()
+        .append("text")
+        .attr("x", 85)
+        .attr("y", function(d, i) { return 70 + (i* 30)})
+        .attr("class", "legend_text")
+        .text(function(d, i) { return "" + intervals[i] + "%"}); 
+
 }
