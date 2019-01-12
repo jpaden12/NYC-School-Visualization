@@ -36,12 +36,14 @@ var mapColors = {
 }
 
 var colorList = d3
-    .selectAll("svg rect")
+    .selectAll(".list")
     .on("click", function() { 
         updateColors(this.id); 
     });
 
 var colorScale = d3.scaleSequential(d3.interpolateGreys).domain([0, 100]); 
+
+var lengend_intervals = [100, 80, 60, 40, 20];
 
 var slider_years = [2013, 2014, 2015, 2016, 2017]; 
 var index = 4; 
@@ -105,6 +107,7 @@ Promise.all([
         .entries(data[1]);
 
     updateMap(nestedDateData[0]); 
+    createLegend(lengend_intervals);
 
     sliderStep.on('onchange', val => {
         index = slider_years.indexOf(val);
@@ -204,8 +207,30 @@ function updateColors(newColor) {
         .attr("fill", function(dis) {
             return colorScale(myMap.get(dis.properties.school_dis)[checked]); 
         }); 
+    d3.selectAll(".legend_square")
+        .transition()
+        .duration(200)
+        .style("fill", function(d) {
+            return colorScale(d);
+        });  
 }
 
-function createLegend() {
+//Creates legend
+function createLegend(intervals) {
     //Inseet legend code here
+    var legend = svg.append('g')
+
+    
+    legend.selectAll("rect")
+        .data(intervals)
+        .enter()
+        .append("rect")
+        .attr("x", 50)
+        .attr("y", function(d, i) { return 50 + (i* 30)})
+        .attr("width", 30)
+        .attr("height", 30)
+        .attr("class", "legend_square")
+        .style("fill", function(d) { return colorScale(d) })
+        .style("opacity", 0.8);
+         
 }

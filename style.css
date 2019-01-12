@@ -52,7 +52,7 @@
 }
 
 .district:hover, 
-svg rect:hover {
+.list:hover {
   fill-opacity: 0.6;
 }
 
