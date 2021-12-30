@@ -212,7 +212,7 @@ function updateColors(newColor) {
         .duration(200)
         .style("fill", function(d) {
             return colorScale(d);
-        });  
+        });
 }
 
 //Creates legend
@@ -239,5 +239,6 @@ function createLegend(intervals) {
         .attr("y", function(d, i) { return 70 + (i* 30)})
         .attr("class", "legend_text")
         .text(function(d, i) { return "" + intervals[i] + "%"}); 
+
 
 }

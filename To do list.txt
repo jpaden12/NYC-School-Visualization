@@ -1,4 +1,0 @@
-- Map dots with schools on each borough (not whole city)
-- List demographics by school and district
-- Create line charts with change in total enrollment by district and school
-- Create legend for choropleth  wirth colors and corresponding percentages
